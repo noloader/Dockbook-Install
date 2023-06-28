@@ -138,6 +138,5 @@ fi
 
 # Move book to top level directory
 echo "Created PDF ${BOOKNAME}.pdf."
-mv "${BOOKNAME}.pdf" ../
 
 exit 0
