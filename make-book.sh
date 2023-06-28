@@ -107,6 +107,5 @@ if [[ -f custom.xsl ]]; then
 fi
 
 echo "Created PDF ${BOOKNAME}.pdf."
-mv "${BOOKNAME}.pdf" ../
 
 exit 0
