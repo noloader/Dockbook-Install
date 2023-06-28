@@ -5,13 +5,6 @@
 # Name without extensions. The final artifact includes the PDF extension.
 BOOKNAME=docbook-install
 
-# This works around a bug in FOP. fonts.xml says the fonts base
-# directory is ../, but FOP can only consume ./.
-if [[ ! -d ./fonts/ ]]; then
-    echo "Copying fonts..."
-    cp -r ../fonts ./
-fi
-
 if [[ ! "$(command -v xmllint 2>/dev/null)" ]]
 then
     echo "xmllint is not installed. Skipping validation."
