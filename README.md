@@ -10,7 +10,7 @@ The instructions are in `docbook-install.pdf`. Once DocBook is setup just run `m
 Customizations
 ==============
 
-DocBook allws you to change the style of your book by using a custom stylesheet. For example, you can change the font family, font size, paragraph indents, left margin, or right margin. This DocBook uses `custom.xsl` for customization. However, since this book's `custom.xsl` is created on the fly, make your changes to `custom.xsl.in`. `custom.xsl.in` will be used to create the `custom.xsl` used when building the book.
+DocBook allows you to change the style of your book by using a custom stylesheet. For example, you can change the font family, font size, paragraph indents, left margin, or right margin. Since this book's `custom.xsl` is created on the fly, you should make your changes to `custom.xsl.in`. `custom.xsl.in` will be used to create the `custom.xsl` used when building the book.
 
 The XSLT translator consumes `custom.xsl` like so:
 
