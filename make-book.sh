@@ -12,13 +12,13 @@ if [[ ! -d ./fonts/ ]]; then
     cp -r ../fonts ./
 fi
 
-if [[ ! "$(command -v xmllint)" ]]
+if [[ ! "$(command -v xmllint 2>/dev/null)" ]]
 then
     echo "xmllint is not installed. Skipping validation."
     echo "  You can install libxml2-utils for the program."
 fi
 
-if [[ ! "$(command -v xsltproc)" ]]
+if [[ ! "$(command -v xsltproc 2>/dev/null)" ]]
 then
     echo "xsltproc is not installed. Exiting."
     echo "  You must install xsltproc for the program."
@@ -34,29 +34,37 @@ fi
 if [[ ! -e "${DOCBOOK_XSL}" ]]
 then
     echo "docbook.xsl was not found. Exiting."
-    echo " You must install stylesheets for the program."
+    echo "  You must install stylesheets for the program."
     exit 1
 fi
 
 # This magic allows us to build the DocBook on Ubuntu and Fedora.
 # Ubuntu and Fedora use different paths to docbook.xsl.
-sed "s|!!DOCBOOK_XSL_FILE!!|${DOCBOOK_XSL}|g" custom.xsl.in > custom.xsl
+sed "s|!!DOCBOOK_XSL_FILE!!|$DOCBOOK_XSL|g" custom.xsl.in > custom.xsl
 
-if [[ ! "$(command -v fop)" ]]
+if [[ ! "$(command -v fop 2>/dev/null)" ]]
 then
     echo "fop is not installed. Exiting."
-    echo " You must install fop for the program."
+    echo "  You must install fop for the program."
     exit 1
 fi
 
-if [[ ! "$(command -v gs)" ]]
+if [[ ! "$(command -v gs 2>/dev/null)" ]]
 then
     echo "GhostScript is not installed. Exiting."
-    echo " You must install GhostScript for the program."
+    echo "  You must install GhostScript for the program."
     exit 1
 fi
 
-if [[ "$(command -v xmllint)" ]]
+# Delete trailing whitespace in sources
+if [[ $(uname -s | grep -c -q 'Darwin') -eq 0 ]]
+then
+    sed -i -E 's/[ '$'\t'']+$//' ./*.xml
+else
+    sed -i '' -E 's/[ '$'\t'']+$//' ./*.xml
+fi
+
+if [[ "$(command -v xmllint 2>/dev/null)" ]]
 then
 
     echo "Validating book..."
@@ -69,9 +77,9 @@ then
     echo "Formatting source code..."
     for file in *.xml
     do
-        if xmllint --format "${file}" --output "${file}.format"
+        if xmllint --format "$file" --output "$file.format"
         then
-            mv "${file}.format" "${file}"
+            mv "$file.format" "$file"
         fi
     done
 fi
@@ -84,7 +92,7 @@ then
 fi
 
 echo "Creating PDF..."
-if ! fop -fo "${BOOKNAME}.fo" -c fonts.xml -dpi 75 -pdf "${BOOKNAME}.pdf"
+if ! fop -fo "${BOOKNAME}.fo" -c fonts.xml -dpi 75 -pdf "$BOOKNAME.pdf"
 then
     echo "Failed to create PDF."
     exit 1
@@ -94,18 +102,42 @@ fi
 
 echo "Optimizing PDF..."
 # https://stackoverflow.com/q/10450120
-if ! gs -q -o "${BOOKNAME}.pdf.opt" -sDEVICE=pdfwrite -dPDFSETTINGS=/screen -dCompatibilityLevel=1.4 "${BOOKNAME}.pdf"
+if ! gs -q -o "${BOOKNAME}.opt.pdf" -sDEVICE=pdfwrite -dPDFSETTINGS=/screen -dCompatibilityLevel=1.4 "${BOOKNAME}.pdf"
 then
     echo "Failed to optimize PDF."
     # Not a hard failure. The unoptimized PDF is available.
+fi
+
+# Calculate savings and print the message
+old_file_size=$(wc -c "${BOOKNAME}.pdf" | awk '{print $1}')
+new_file_size=$(wc -c "${BOOKNAME}.opt.pdf" | awk '{print $1}')
+diff_size="$((${old_file_size}-${new_file_size}))"
+echo "PDF file size is ${new_file_size}, trimmed ${diff_size} bytes."
+
+if [[ -e "${BOOKNAME}.opt.pdf" ]]; then
+    mv "${BOOKNAME}.opt.pdf" "${BOOKNAME}.pdf"
+fi
+
+if [[ "$(command -v qpdf 2>/dev/null)" ]]
+then
+    echo "Performing qa check..."
+    if qpdf --check "${BOOKNAME}.pdf" 1>/dev/null
+    then
+        echo "Book is well formed."
+    else
+        echo "Book is damaged or corrupt."
+    fi
 else
-    mv "${BOOKNAME}.pdf.opt" "${BOOKNAME}.pdf"
+    echo "Skipping qa check..."
+    echo "  You can install qpdf for the program."
 fi
 
 if [[ -f custom.xsl ]]; then
     rm -f custom.xsl
 fi
 
+# Move book to top level directory
 echo "Created PDF ${BOOKNAME}.pdf."
+mv "${BOOKNAME}.pdf" ../
 
 exit 0
