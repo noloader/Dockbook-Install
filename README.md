@@ -10,15 +10,15 @@ The instructions are in `docbook-install.pdf`. Once DocBook is setup just run `m
 Customizations
 ==============
 
-DocBook allows you to change the style of your book by using a custom stylesheet. For example, you can change the font family, font size, paragraph indents, left margin, or right margin. Since this book's `custom.xsl` is created on the fly, you should make your changes to `custom.xsl.in`. `custom.xsl.in` will be used to create the `custom.xsl` used when building the book.
+DocBook allows you to change the style of your book by using a custom stylesheet. For example, you can change the font family, font size, paragraph indents, left margin, or right margin. Since this book's `custom.xsl` is created on the fly, you should make your changes to `custom.xsl.in`. `custom.xsl.in` will be used to create the `custom.xsl` to build the book.
 
-The XSLT translator consumes `custom.xsl` like so:
+The XSLT translator consumes `custom.xsl` like shown below. The translator creates the formatted object that Apache's FOP uses to create the PDF.
 
 ```
 xsltproc --xinclude custom.xsl book.xml > "${BOOKNAME}.fo"
 ```
 
-This DocBook already has changes applied in `custom.xsl.in`. The font family and font size were changed to 11 point Arial to make the book easier on the eyes. Margins and outdents were also changed to use more of the available page.
+This DocBook has changes applied in `custom.xsl.in`. The font family and font size were changed to 11 point Arial to make the book easier on the eyes. Margins and outdents were also changed to use more of the available page.
 
 make-book.sh
 ============
