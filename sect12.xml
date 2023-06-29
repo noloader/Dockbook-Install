@@ -3,7 +3,7 @@
 <section id="docbook_test">
   <title>Testing</title>
   <para>You should test the installation using <systemitem>command -v</systemitem>. The Posix command is the standard way to check availability of a program.</para>
-  <programlisting><?db-font-size 75% ?>$ command -v xmllint
+  <programlisting><?code-font-size 75% ?>$ command -v xmllint
 /usr/bin/xmllint
 $ command -v xsltproc
 /usr/bin/xsltproc
@@ -11,7 +11,7 @@ $ command -v fop
 /usr/local/bin/fop
 </programlisting>
   <para>You should also verify the version of <systemitem>fop</systemitem>.</para>
-  <programlisting><?db-font-size 75% ?>$ fop -version
+  <programlisting><?code-font-size 75% ?>$ fop -version
 FOP Version 2.8
 </programlisting>
   <para>If the version is unexpected then verify the shell script located in <systemitem>/usr/local/bin/fop</systemitem>, and ensure it is executable. If the script is correct then run <systemitem>hash -r</systemitem> to clear the Bash program cache.</para>

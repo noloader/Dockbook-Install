@@ -3,7 +3,7 @@
 <section id="docbook_xmllint">
   <title>XML lint</title>
   <para>The XML lint provides validation and formatting of XML source files. It is provided by the <systemitem>libxml2-utils</systemitem> package. To install the package on Ubuntu issue the following.</para>
-  <programlisting><?db-font-size 75% ?>$ sudo apt-get install libxml2-utils
+  <programlisting><?code-font-size 75% ?>$ sudo apt-get install libxml2-utils
 </programlisting>
   <para>After you install the program you should run <systemitem>hash -r</systemitem> to clear Bash's program cache.</para>
 </section>

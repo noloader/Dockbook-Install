@@ -3,7 +3,7 @@
 <section id="docbook_hyphenate">
   <title>FO hyphenate</title>
   <para>You can add hyphenation to the book by installing FOP XML Hyphenation Patterns. Download the <emphasis>compiled binary</emphasis> for FOP XML Hyphenation Patterns from the <ulink url="http://offo.sourceforge.net/">Objects For Formatting Objects (OFFO) website</ulink>. Install <systemitem>fop-hyph.jar</systemitem> in FOP's <systemitem>lib/</systemitem> directory.</para>
-  <programlisting><?db-font-size 75% ?>$ sudo cp fop-hyph.jar /usr/local/bin/fop-2.8/fop/lib/
+  <programlisting><?code-font-size 75% ?>$ sudo cp fop-hyph.jar /usr/local/bin/fop-2.8/fop/lib/
 $ ls /usr/local/bin/fop-2.8/fop/lib/*.jar
 ...
 /usr/local/bin/fop-2.8/fop/lib/commons-io-2.11.0.jar

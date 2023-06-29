@@ -3,7 +3,7 @@
 <section id="docbook_gs">
   <title>GhostScript</title>
   <para>The GhostScript package is used to optimize the PDF created by DocBook. To install the package on Ubuntu issue the following.</para>
-  <programlisting><?db-font-size 75% ?>$ sudo apt-get install ghostscript
+  <programlisting><?code-font-size 75% ?>$ sudo apt-get install ghostscript
 </programlisting>
   <para>After you install the program you should run <systemitem>hash -r</systemitem> to clear Bash's program cache.</para>
 </section>
