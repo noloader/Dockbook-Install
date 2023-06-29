@@ -3,6 +3,6 @@
 <section id="docbook_dtd">
   <title>DockBook DTD</title>
   <para>The DockBook DTD provides entity definitions. The DTD defines the structure, elements and attributes of an XML document. It is provided by the <systemitem>docbook</systemitem> package. To install the package on Ubuntu issue the following.</para>
-  <programlisting>$ sudo apt-get install docbook
+  <programlisting><?db-font-size 75% ?>$ sudo apt-get install docbook
 </programlisting>
 </section>
