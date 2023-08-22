@@ -14,10 +14,10 @@ if [[ -z "$JAVA_HOME" ]]; then
     export JAVA_HOME
 fi
 
-CLASSPATH=/usr/local/bin/fop-2.8:/usr/local/bin/fop-2.8/lib
+CLASSPATH=/usr/local/bin/fop-2.9:/usr/local/bin/fop-2.9/lib
 export CLASSPATH
 
-/usr/local/bin/fop-2.8/fop/fop $*
+/usr/local/bin/fop-2.9/fop/fop $*
 </programlisting>
   <para>Running the script will set <systemitem>JAVA_HOME</systemitem> to the current version of the JVM.</para>
   <programlisting><?code-font-size 75% ?>$ readlink -f $(command -v java) | sed "s|/bin/java$||"
