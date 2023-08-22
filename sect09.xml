@@ -8,9 +8,8 @@ $ ls /usr/local/bin/fop-2.9/fop/lib/*.jar
 ...
 /usr/local/bin/fop-2.9/fop/lib/commons-io-2.11.0.jar
 /usr/local/bin/fop-2.9/fop/lib/commons-logging-1.0.4.jar
-/usr/local/bin/fop-2.9/fop/lib/fontbox-2.0.24.jar
+/usr/local/bin/fop-2.9/fop/lib/fontbox-2.0.27.jar
 /usr/local/bin/fop-2.9/fop/lib/fop-hyph.jar
-/usr/local/bin/fop-2.9/fop/lib/serializer-2.7.2.jar
 /usr/local/bin/fop-2.9/fop/lib/xml-apis-1.4.01.jar
 /usr/local/bin/fop-2.9/fop/lib/xml-apis-ext-1.3.04.jar
 ...
